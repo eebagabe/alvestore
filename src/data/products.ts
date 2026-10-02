@@ -84,7 +84,27 @@ export const products: Product[] = [
     category: 'Eletrônicos',
     image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=70',
   },
+  {
+    id: 'p9',
+    name: 'Perfume Brisa do Mar 100ml',
+    description: 'Fragrância fresca e cítrica, inspirada no litoral alagoano.',
+    price: 139.9,
+    stock: 15,
+    category: 'Beleza',
+    image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&q=70',
+  },
+  {
+    id: 'p10',
+    name: 'Caneca de Cerâmica 350ml',
+    description: 'Cerâmica artesanal, pode ir ao micro-ondas.',
+    price: 39.9,
+    stock: 2,
+    category: 'Casa',
+    image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=70',
+  },
 ]
+
+export const getProduct = (id: string) => products.find((p) => p.id === id)
 
 export const LOW_STOCK_THRESHOLD = 5
 

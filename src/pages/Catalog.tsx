@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react'
 import banner from '../assets/banner.png'
 import { CatalogSidebar, type CategoryFilter } from '../components/CatalogSidebar'
+import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { ProductCard } from '../components/ProductCard'
 import { products, type PriceRange } from '../data/products'
 import './Catalog.css'
-
-const CURRENT_YEAR = new Date().getFullYear()
 
 export function Catalog() {
   const [category, setCategory] = useState<CategoryFilter>('Todos')
@@ -81,11 +80,7 @@ export function Catalog() {
         </div>
       </main>
 
-      <footer className="footer">
-        <div className="container">
-          © {CURRENT_YEAR} AlveStore · Maceió - AL · Qualidade • Praticidade • Sempre com você
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }

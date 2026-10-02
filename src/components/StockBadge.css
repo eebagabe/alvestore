@@ -1,0 +1,22 @@
+.stock {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.stock--ok {
+  background: var(--color-primary-soft);
+  color: var(--blue-700);
+}
+
+.stock--low {
+  background: #fff4e0;
+  color: #a15c00;
+}
+
+.stock--out {
+  background: #fde8e8;
+  color: var(--danger);
+}
