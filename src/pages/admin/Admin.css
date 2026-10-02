@@ -1,0 +1,246 @@
+/* Login */
+.login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(26, 115, 255, 0.35), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(26, 115, 255, 0.25), transparent 40%),
+    var(--color-dark);
+}
+
+.login__box {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px 28px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.login__logo {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: var(--ink-900);
+  border-radius: var(--radius-lg);
+}
+
+.login__box h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.login__box p {
+  margin: 0 0 6px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.login__box label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.login__box input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.login__box input:focus {
+  outline: 2px solid var(--blue-300);
+  border-color: var(--color-primary);
+}
+
+.login__error {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* Painel */
+.admin {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin__sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 16px;
+  background: var(--color-dark);
+  color: var(--white);
+}
+
+.admin__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.admin__brand img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.admin__brand strong {
+  color: var(--blue-400);
+}
+
+.admin__sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin__sidebar nav a {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  color: var(--gray-300);
+}
+
+.admin__sidebar nav a:hover {
+  background: var(--ink-700);
+  color: var(--white);
+}
+
+.admin__sidebar nav a.active {
+  background: var(--color-primary);
+  color: var(--white);
+}
+
+.admin__user {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--gray-300);
+  word-break: break-all;
+}
+
+.admin__content {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.admin__content h1 {
+  margin-top: 0;
+}
+
+.admin__hint {
+  color: var(--color-text-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.stat span {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.stat strong {
+  font-size: 1.4rem;
+}
+
+.stat--alert {
+  border-left-color: var(--warning);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table th {
+  background: var(--color-primary-soft);
+  color: var(--blue-800);
+  font-weight: 700;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.qty--low {
+  color: #a15c00;
+  font-weight: 700;
+}
+
+.qty--out {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .admin {
+    flex-direction: column;
+  }
+
+  .admin__sidebar {
+    width: 100%;
+  }
+
+  .admin__sidebar nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .admin__content {
+    padding: 20px 16px;
+  }
+}
