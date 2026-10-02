@@ -102,6 +102,24 @@ export const products: Product[] = [
     category: 'Casa',
     image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=70',
   },
+  {
+    id: 'p11',
+    name: 'Câmera Instantânea',
+    description: 'Fotos impressas na hora. Registre cada pôr do sol na orla.',
+    price: 449.9,
+    stock: 6,
+    category: 'Eletrônicos',
+    image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=70',
+  },
+  {
+    id: 'p12',
+    name: 'Tênis Esportivo Run',
+    description: 'Leve e respirável, ideal para correr na orla de Ponta Verde.',
+    price: 249.9,
+    stock: 18,
+    category: 'Acessórios',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=70',
+  },
 ]
 
 export const getProduct = (id: string) => products.find((p) => p.id === id)
