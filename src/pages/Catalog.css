@@ -90,7 +90,7 @@
 .catalog__grid {
   display: grid;
   align-content: start;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 210px));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 250px));
   justify-content: start;
   gap: 16px;
 }
