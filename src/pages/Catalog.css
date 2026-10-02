@@ -1,7 +1,10 @@
+.hero {
+  padding-top: 20px;
+}
+
 .hero img {
   width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
+  border-radius: 8px;
 }
 
 .catalog {

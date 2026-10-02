@@ -30,7 +30,7 @@ export function Catalog() {
   return (
     <>
       <Header />
-      <section className="hero">
+      <section className="container hero">
         <img src={banner} alt="AlveStore — Qualidade, praticidade, sempre com você" />
       </section>
 
