@@ -10,17 +10,21 @@ export function AdminLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   if (user) return <Navigate to="/admin/painel" replace />
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError('')
+    setLoading(true)
     try {
       await login(email, password)
       navigate('/admin/painel')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao entrar.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -54,8 +58,8 @@ export function AdminLogin() {
 
         {error && <span className="login__error">{error}</span>}
 
-        <button type="submit" className="btn btn-primary">
-          Entrar
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
     </div>

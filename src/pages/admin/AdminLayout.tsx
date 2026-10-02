@@ -31,7 +31,7 @@ export function AdminLayout() {
           ))}
         </nav>
         <div className="admin__user">
-          <small>{user}</small>
+          <small>{user.name} · {user.email}</small>
           <button className="btn btn-ghost" onClick={logout}>
             Sair
           </button>
