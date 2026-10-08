@@ -4,11 +4,14 @@ import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { WHATSAPP_NUMBER } from '../config'
 import { useCart, type CartItem } from '../context/CartContext'
+import { useCustomer } from '../context/CustomerContext'
 import { fetchProducts } from '../services/catalog'
+import { formatAddress, type Account } from '../types/account'
+import { maskPhone } from '../utils/masks'
 import { formatPrice } from '../utils/format'
 import './Cart.css'
 
-function buildMessage(items: CartItem[], customerName: string, note: string) {
+function buildMessage(items: CartItem[], customerName: string, note: string, account: Account | null) {
   const lines = items.map(
     (i) =>
       `• ${i.quantity}x ${i.name} — ${formatPrice(i.price)} cada (${formatPrice(i.price * i.quantity)})\n  ${window.location.origin}/produto/${i.productId}`,
@@ -23,14 +26,18 @@ function buildMessage(items: CartItem[], customerName: string, note: string) {
     ...lines,
     '',
     `Total: ${formatPrice(total)}`,
+    ...(account?.phone ? ['', `Telefone: ${maskPhone(account.phone)}`] : []),
+    ...(account?.address ? [`Endereço: ${formatAddress(account.address)}`] : []),
     ...(note.trim() ? ['', `Observação: ${note.trim()}`] : []),
   ].join('\n')
 }
 
 export function Cart() {
   const { items, setQuantity, remove, sync } = useCart()
+  const { account } = useCustomer()
   const [deselected, setDeselected] = useState<Set<string>>(new Set())
   const [customerName, setCustomerName] = useState('')
+  const name = customerName || account?.name || ''
   const [note, setNote] = useState('')
   const [sentIds, setSentIds] = useState<string[] | null>(null)
 
@@ -57,7 +64,7 @@ export function Cart() {
     setDeselected(selected.length === items.length ? new Set(items.map((i) => i.productId)) : new Set())
 
   const sendOrder = () => {
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage(selected, customerName, note))}`
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage(selected, name, note, account))}`
     window.open(url, '_blank', 'noopener')
     setSentIds(selected.map((i) => i.productId))
   }
@@ -160,9 +167,20 @@ export function Cart() {
               </div>
 
               <label>
-                Seu nome (opcional)
-                <input value={customerName} onChange={(e) => setCustomerName(e.target.value)} maxLength={80} />
+                Seu nome {account ? '' : '(opcional)'}
+                <input value={name} onChange={(e) => setCustomerName(e.target.value)} maxLength={80} />
               </label>
+              {account?.address ? (
+                <p className="cart__address">
+                  <strong>Entrega:</strong> {formatAddress(account.address)}{' '}
+                  <Link to="/minha-conta">Alterar</Link>
+                </p>
+              ) : (
+                <p className="cart__address">
+                  <Link to="/entrar?voltar=/carrinho">Entre na sua conta</Link> para enviar endereço e telefone junto
+                  com o pedido.
+                </p>
+              )}
               <label>
                 Observação (opcional)
                 <textarea

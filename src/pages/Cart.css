@@ -252,3 +252,17 @@
     grid-column: 3 / 4;
   }
 }
+
+.cart__address {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.cart__address a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
