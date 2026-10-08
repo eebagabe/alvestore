@@ -20,7 +20,7 @@ function ProductDetailView({ id }: { id: string }) {
   const [product, setProduct] = useState<Product | null>(null)
   const [status, setStatus] = useState<'loading' | 'ok' | 'missing' | 'error'>('loading')
   const [activeImage, setActiveImage] = useState(0)
-  const { items, add } = useCart()
+  const { quantityOf, add } = useCart()
 
   useEffect(() => {
     fetchProduct(id)
@@ -58,7 +58,7 @@ function ProductDetailView({ id }: { id: string }) {
     )
   }
 
-  const inCart = items[product.id] ?? 0
+  const inCart = quantityOf(product.id)
   const outOfStock = product.stock === 0
   const maxedOut = inCart >= product.stock
 
@@ -114,7 +114,11 @@ function ProductDetailView({ id }: { id: string }) {
               >
                 {outOfStock ? 'Indisponível' : maxedOut ? 'Limite do estoque' : 'Adicionar ao carrinho'}
               </button>
-              {inCart > 0 && <small>{inCart} no carrinho</small>}
+              {inCart > 0 && (
+                <Link to="/carrinho" className="detail__cart-link">
+                  {inCart} no carrinho · ver carrinho
+                </Link>
+              )}
             </div>
 
             <ul className="detail__perks">

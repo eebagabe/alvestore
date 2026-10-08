@@ -46,7 +46,7 @@ export function Header() {
             </span>
           </button>
 
-          <button type="button" className="header__action">
+          <Link to="/carrinho" className="header__action">
             <span className="header__cart">
               <CartIcon />
               {count > 0 && <span className="header__badge">{count}</span>}
@@ -55,7 +55,7 @@ export function Header() {
               <small>Meu</small>
               <strong>Carrinho</strong>
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>

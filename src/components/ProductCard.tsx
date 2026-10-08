@@ -11,9 +11,9 @@ interface Props {
 }
 
 export function ProductCard({ product }: Props) {
-  const { items, add } = useCart()
+  const { quantityOf, add } = useCart()
   const outOfStock = product.stock === 0
-  const maxedOut = (items[product.id] ?? 0) >= product.stock
+  const maxedOut = quantityOf(product.id) >= product.stock
   const detailUrl = `/produto/${product.id}`
   const cover = coverUrl(product)
 

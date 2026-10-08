@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
 import { ScrollToTop } from './components/ScrollToTop'
+import { Cart } from './pages/Cart'
 import { Catalog } from './pages/Catalog'
 import { ProductDetail } from './pages/ProductDetail'
 import { AdminLayout } from './pages/admin/AdminLayout'
@@ -25,6 +26,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Catalog />} />
             <Route path="/produto/:id" element={<ProductDetail />} />
+            <Route path="/carrinho" element={<Cart />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/painel" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
