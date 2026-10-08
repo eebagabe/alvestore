@@ -11,6 +11,7 @@ import { ProductList } from './pages/admin/products/ProductList'
 import { SaleForm } from './pages/admin/sales/SaleForm'
 import { SalesPage } from './pages/admin/sales/SalesPage'
 import { CashPage } from './pages/admin/cash/CashPage'
+import { DashboardPage } from './pages/admin/dashboard/DashboardPage'
 import { PurchasesPage } from './pages/admin/purchases/PurchasesPage'
 import { Financeiro, Marketing } from './pages/admin/sections'
 import { StockPage } from './pages/admin/stock/StockPage'
@@ -26,7 +27,8 @@ export default function App() {
             <Route path="/produto/:id" element={<ProductDetail />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/painel" element={<AdminLayout />}>
-              <Route index element={<Navigate to="produtos" replace />} />
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<DashboardPage />} />
               <Route path="produtos" element={<ProductList />} />
               <Route path="produtos/novo" element={<ProductForm />} />
               <Route path="produtos/:id" element={<ProductForm />} />

@@ -172,3 +172,32 @@ export interface Purchase {
   receivedAt: string | null
   cancelledAt: string | null
 }
+
+export interface TopProduct {
+  productId: string
+  productName: string
+  quantity: number
+  revenue: number
+  profit: number
+  currentStock: number
+}
+
+export interface Dashboard {
+  from: string | null
+  salesCount: number
+  pendingSalesCount: number
+  unitsSold: number
+  revenue: number
+  cost: number
+  profit: number
+  cashBalance: number
+  pendingInflow: number
+  pendingOutflow: number
+  stockUnits: number
+  stockCostValue: number
+  purchaseRequestsCount: number
+  scheduledPurchasesCount: number
+  scheduledPurchasesTotal: number
+  topProducts: TopProduct[]
+  lowStock: { productId: string; productName: string; stock: number }[]
+}

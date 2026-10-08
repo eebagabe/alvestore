@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import './Admin.css'
 
 const sections = [
+  { to: 'dashboard', label: 'Dashboard' },
   { to: 'produtos', label: 'Produtos' },
   { to: 'estoque', label: 'Estoque' },
   { to: 'compras', label: 'Compras' },
