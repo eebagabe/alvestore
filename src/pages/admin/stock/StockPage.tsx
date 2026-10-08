@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { LOW_STOCK_THRESHOLD } from '../../../data/products'
 import { useAdminApi } from '../../../hooks/useAdminApi'
 import { MOVEMENT_LABELS, type AdminProduct, type StockMovement } from '../../../types/admin'
@@ -167,6 +168,7 @@ export function StockPage() {
                   <th>Produto</th>
                   <th className="num">Estoque</th>
                   <th className="num">Valor (custo)</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -186,6 +188,15 @@ export function StockPage() {
                       {p.stock}
                     </td>
                     <td className="num">{formatPrice(p.stock * p.unitCost)}</td>
+                    <td className="actions-cell">
+                      <Link
+                        to={`/admin/painel/compras?produto=${p.id}`}
+                        className="link-primary"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Comprar
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>

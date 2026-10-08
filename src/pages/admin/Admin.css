@@ -774,3 +774,42 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+/* Compras */
+.admin__content > section > h2 {
+  margin: 24px 0 12px;
+  font-size: 1.05rem;
+}
+
+.section-gap {
+  margin-bottom: 8px;
+}
+
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.request-card {
+  max-width: none;
+}
+
+.request-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.request-card__head small {
+  color: var(--color-text-muted);
+}
+
+.request-card .form__actions {
+  align-items: center;
+}
+
+.request-card__total {
+  margin-right: auto;
+  font-weight: 700;
+}

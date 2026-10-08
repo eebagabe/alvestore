@@ -6,6 +6,7 @@ import './Admin.css'
 const sections = [
   { to: 'produtos', label: 'Produtos' },
   { to: 'estoque', label: 'Estoque' },
+  { to: 'compras', label: 'Compras' },
   { to: 'vendas', label: 'Vendas' },
   { to: 'caixa', label: 'Caixa' },
   { to: 'financeiro', label: 'Financeiro' },

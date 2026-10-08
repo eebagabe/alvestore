@@ -142,3 +142,33 @@ export interface CashSummary {
   pendingInflow: number
   pendingOutflow: number
 }
+
+export type PurchaseStatus = 'Requested' | 'Scheduled' | 'Received' | 'Cancelled'
+
+export const PURCHASE_STATUS: Record<PurchaseStatus, { label: string; tag: string }> = {
+  Requested: { label: 'Requisição', tag: 'tag--muted' },
+  Scheduled: { label: 'Programada', tag: 'tag--warn' },
+  Received: { label: 'Recebida', tag: 'tag--ok' },
+  Cancelled: { label: 'Cancelada', tag: 'tag--danger' },
+}
+
+export interface Purchase {
+  id: string
+  number: number
+  productId: string
+  productName: string
+  productStock: number
+  productUnitCost: number
+  requestedQuantity: number
+  quantity: number | null
+  unitCost: number
+  total: number
+  supplier: string | null
+  note: string | null
+  expectedAt: string | null
+  status: PurchaseStatus
+  createdAt: string
+  confirmedAt: string | null
+  receivedAt: string | null
+  cancelledAt: string | null
+}

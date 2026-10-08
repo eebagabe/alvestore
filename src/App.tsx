@@ -11,6 +11,7 @@ import { ProductList } from './pages/admin/products/ProductList'
 import { SaleForm } from './pages/admin/sales/SaleForm'
 import { SalesPage } from './pages/admin/sales/SalesPage'
 import { CashPage } from './pages/admin/cash/CashPage'
+import { PurchasesPage } from './pages/admin/purchases/PurchasesPage'
 import { Financeiro, Marketing } from './pages/admin/sections'
 import { StockPage } from './pages/admin/stock/StockPage'
 
@@ -29,6 +30,7 @@ export default function App() {
               <Route path="produtos" element={<ProductList />} />
               <Route path="produtos/novo" element={<ProductForm />} />
               <Route path="produtos/:id" element={<ProductForm />} />
+              <Route path="compras" element={<PurchasesPage />} />
               <Route path="vendas" element={<SalesPage />} />
               <Route path="vendas/nova" element={<SaleForm />} />
               <Route path="caixa" element={<CashPage />} />
