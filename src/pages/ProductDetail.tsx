@@ -1,23 +1,54 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { StockBadge } from '../components/StockBadge'
 import { useCart } from '../context/CartContext'
-import { getProduct } from '../data/products'
+import type { Product } from '../data/products'
+import { assetUrl, ApiError } from '../services/api'
+import { fetchProduct } from '../services/catalog'
 import { formatPrice } from '../utils/format'
 import './ProductDetail.css'
 
 export function ProductDetail() {
   const { id = '' } = useParams()
-  const product = getProduct(id)
+  // key remonta a página ao trocar de produto, zerando estado e foto ativa
+  return <ProductDetailView key={id} id={id} />
+}
+
+function ProductDetailView({ id }: { id: string }) {
+  const [product, setProduct] = useState<Product | null>(null)
+  const [status, setStatus] = useState<'loading' | 'ok' | 'missing' | 'error'>('loading')
+  const [activeImage, setActiveImage] = useState(0)
   const { items, add } = useCart()
 
-  if (!product) {
+  useEffect(() => {
+    fetchProduct(id)
+      .then((p) => {
+        setProduct(p)
+        setStatus('ok')
+      })
+      .catch((err) => setStatus(err instanceof ApiError && err.status === 404 ? 'missing' : 'error'))
+  }, [id])
+
+  if (status === 'loading') {
+    return (
+      <>
+        <Header />
+        <main className="container detail">
+          <p>Carregando...</p>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
+  if (status !== 'ok' || !product) {
     return (
       <>
         <Header />
         <main className="container detail detail--missing">
-          <h1>Produto não encontrado</h1>
+          <h1>{status === 'missing' ? 'Produto não encontrado' : 'Não foi possível carregar o produto'}</h1>
           <Link to="/" className="btn btn-primary">
             Voltar ao catálogo
           </Link>
@@ -44,8 +75,28 @@ export function ProductDetail() {
         </nav>
 
         <div className="detail__grid">
-          <div className="detail__image">
-            <img src={product.image} alt={product.name} />
+          <div className="detail__gallery">
+            <div className="detail__image">
+              {product.images.length > 0 ? (
+                <img src={assetUrl(product.images[activeImage]?.url ?? product.images[0].url)} alt={product.name} />
+              ) : (
+                <span className="detail__noimage">Sem foto</span>
+              )}
+            </div>
+            {product.images.length > 1 && (
+              <div className="detail__thumbs">
+                {product.images.map((img, index) => (
+                  <button
+                    key={img.id}
+                    type="button"
+                    className={index === activeImage ? 'is-active' : ''}
+                    onClick={() => setActiveImage(index)}
+                  >
+                    <img src={assetUrl(img.url)} alt="" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="detail__info">

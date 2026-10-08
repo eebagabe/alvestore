@@ -132,3 +132,12 @@
   padding: 8px 12px;
   font-size: 0.85rem;
 }
+
+.card__noimage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gray-500);
+  font-size: 0.85rem;
+}

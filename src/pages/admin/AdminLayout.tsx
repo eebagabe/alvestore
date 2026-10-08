@@ -4,9 +4,14 @@ import { useAuth } from '../../context/AuthContext'
 import './Admin.css'
 
 const sections = [
+  { to: 'dashboard', label: 'Dashboard' },
+  { to: 'produtos', label: 'Produtos' },
+  { to: 'estoque', label: 'Estoque' },
+  { to: 'compras', label: 'Compras' },
+  { to: 'vendas', label: 'Vendas' },
+  { to: 'caixa', label: 'Caixa' },
   { to: 'financeiro', label: 'Financeiro' },
   { to: 'marketing', label: 'Marketing' },
-  { to: 'estoque', label: 'Estoque' },
 ]
 
 export function AdminLayout() {
@@ -31,7 +36,7 @@ export function AdminLayout() {
           ))}
         </nav>
         <div className="admin__user">
-          <small>{user}</small>
+          <small>{user.name} · {user.email}</small>
           <button className="btn btn-ghost" onClick={logout}>
             Sair
           </button>
