@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useState, type ReactNode } from 'react'
 import { ApiError, apiRequest } from '../services/api'
 
 export interface AuthUser {
@@ -65,10 +65,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSession(result)
   }
 
-  const logout = () => {
+  const logout = useCallback(() => {
     sessionStorage.removeItem(STORAGE_KEY)
     setSession(null)
-  }
+  }, [])
 
   return (
     <AuthContext.Provider value={{ user: session?.user ?? null, token: session?.token ?? null, login, logout }}>

@@ -9,9 +9,21 @@ export class ApiError extends Error {
   }
 }
 
+/** Resolve caminhos servidos pela API (ex.: /uploads/foto.jpg) para URL absoluta. */
+export const assetUrl = (path: string) => (/^https?:\/\//.test(path) ? path : `${API_URL}${path}`)
+
+function errorMessage(body: unknown): string {
+  if (body && typeof body === 'object') {
+    const { message, errors } = body as { message?: string; errors?: Record<string, string[]> }
+    if (message) return message
+    if (errors) return 'Verifique os campos informados.'
+  }
+  return 'Erro inesperado no servidor.'
+}
+
 export async function apiRequest<T>(path: string, init: RequestInit = {}, token?: string): Promise<T> {
   const headers = new Headers(init.headers)
-  if (init.body) headers.set('Content-Type', 'application/json')
+  if (init.body && !(init.body instanceof FormData)) headers.set('Content-Type', 'application/json')
   if (token) headers.set('Authorization', `Bearer ${token}`)
 
   let response: Response
@@ -23,8 +35,10 @@ export async function apiRequest<T>(path: string, init: RequestInit = {}, token?
 
   if (!response.ok) {
     const body = await response.json().catch(() => null)
-    throw new ApiError(response.status, body?.message ?? 'Erro inesperado no servidor.')
+    throw new ApiError(response.status, errorMessage(body))
   }
+
+  if (response.status === 204) return undefined as T
 
   return response.json() as Promise<T>
 }
