@@ -10,6 +10,7 @@ import { ProductForm } from './pages/admin/products/ProductForm'
 import { ProductList } from './pages/admin/products/ProductList'
 import { SaleForm } from './pages/admin/sales/SaleForm'
 import { SalesPage } from './pages/admin/sales/SalesPage'
+import { CashPage } from './pages/admin/cash/CashPage'
 import { Financeiro, Marketing } from './pages/admin/sections'
 import { StockPage } from './pages/admin/stock/StockPage'
 
@@ -30,6 +31,7 @@ export default function App() {
               <Route path="produtos/:id" element={<ProductForm />} />
               <Route path="vendas" element={<SalesPage />} />
               <Route path="vendas/nova" element={<SaleForm />} />
+              <Route path="caixa" element={<CashPage />} />
               <Route path="financeiro" element={<Financeiro />} />
               <Route path="marketing" element={<Marketing />} />
               <Route path="estoque" element={<StockPage />} />

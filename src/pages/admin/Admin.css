@@ -728,3 +728,49 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Filtros e ações */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filter:hover {
+  border-color: var(--color-primary);
+}
+
+.filter--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--white);
+}
+
+.tag--warn {
+  background: #fff4e0;
+  color: #a15c00;
+}
+
+.actions-cell {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.link-primary {
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+}

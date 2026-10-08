@@ -14,3 +14,10 @@ export const profitOf = (cost: number, price: number) => ({
 export const formatPercent = (value: number | null) => (value === null ? '—' : percent.format(value))
 
 export const formatDateTime = (iso: string) => dateTime.format(new Date(iso))
+
+/** Data/hora local no formato aceito por <input type="datetime-local">. */
+export const nowLocalInput = () => {
+  const d = new Date()
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset())
+  return d.toISOString().slice(0, 16)
+}

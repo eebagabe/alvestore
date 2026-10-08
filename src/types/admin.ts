@@ -46,7 +46,7 @@ export interface SaveProductPayload {
   listings: { platform: Platform; url: string | null }[]
 }
 
-export type StockMovementType = 'Entry' | 'Exit' | 'Adjustment' | 'Sale' | 'SaleCancellation'
+export type StockMovementType = 'Entry' | 'Exit' | 'Adjustment' | 'Sale' | 'SaleCancellation' | 'Purchase'
 
 export const MOVEMENT_LABELS: Record<StockMovementType, string> = {
   Entry: 'Entrada',
@@ -54,6 +54,7 @@ export const MOVEMENT_LABELS: Record<StockMovementType, string> = {
   Adjustment: 'Ajuste',
   Sale: 'Venda',
   SaleCancellation: 'Venda cancelada',
+  Purchase: 'Compra recebida',
 }
 
 export interface StockMovement {
@@ -99,4 +100,44 @@ export interface CreateSalePayload {
   customerName: string | null
   note: string | null
   soldAt: string | null
+}
+
+export type CashMovementType = 'Inflow' | 'Outflow'
+export type CashMovementStatus = 'Pending' | 'Completed' | 'Cancelled'
+export type CashMovementSource = 'Manual' | 'Sale' | 'Purchase'
+
+export const CASH_STATUS_LABELS: Record<CashMovementStatus, string> = {
+  Pending: 'Em espera',
+  Completed: 'Realizada',
+  Cancelled: 'Cancelada',
+}
+
+export const STATUS_TAG: Record<CashMovementStatus, string> = {
+  Pending: 'tag--warn',
+  Completed: 'tag--ok',
+  Cancelled: 'tag--danger',
+}
+
+export interface CashMovement {
+  id: string
+  type: CashMovementType
+  source: CashMovementSource
+  status: CashMovementStatus
+  amount: number
+  description: string
+  occurredAt: string
+  createdAt: string
+  updatedAt: string
+  saleId: string | null
+  saleNumber: number | null
+  purchaseId: string | null
+  purchaseNumber: number | null
+}
+
+export interface CashSummary {
+  balance: number
+  completedInflow: number
+  completedOutflow: number
+  pendingInflow: number
+  pendingOutflow: number
 }

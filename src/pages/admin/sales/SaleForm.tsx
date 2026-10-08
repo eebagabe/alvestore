@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAdminApi } from '../../../hooks/useAdminApi'
 import { PLATFORMS, type AdminProduct, type CreateSalePayload, type Platform, type Sale } from '../../../types/admin'
-import { formatPercent, formatPrice, profitOf } from '../../../utils/format'
+import { formatPercent, formatPrice, nowLocalInput, profitOf } from '../../../utils/format'
 
 interface Line {
   key: number
@@ -14,13 +14,6 @@ interface Line {
 let nextKey = 1
 const newLine = (): Line => ({ key: nextKey++, productId: '', quantity: '1', unitPrice: '' })
 
-/** Data/hora local no formato aceito por <input type="datetime-local">. */
-const nowLocal = () => {
-  const d = new Date()
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset())
-  return d.toISOString().slice(0, 16)
-}
-
 export function SaleForm() {
   const api = useAdminApi()
   const navigate = useNavigate()
@@ -28,7 +21,7 @@ export function SaleForm() {
   const [lines, setLines] = useState<Line[]>(() => [newLine()])
   const [channel, setChannel] = useState<Platform | ''>('')
   const [customerName, setCustomerName] = useState('')
-  const [soldAt, setSoldAt] = useState(nowLocal)
+  const [soldAt, setSoldAt] = useState(nowLocalInput)
   const [note, setNote] = useState('')
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
