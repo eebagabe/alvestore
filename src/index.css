@@ -12,6 +12,17 @@ body {
   padding: 0;
 }
 
+/* Rodapé sempre no fim da tela, mesmo em páginas curtas */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root > main {
+  flex: 1;
+}
+
 body {
   font-family: var(--font);
   background: var(--color-bg);

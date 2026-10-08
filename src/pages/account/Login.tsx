@@ -1,10 +1,9 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
-import { Footer } from '../../components/Footer'
-import { Header } from '../../components/Header'
+import { PasswordInput } from '../../components/PasswordInput'
 import { useCustomer } from '../../context/CustomerContext'
 import { safeRedirect } from '../../utils/redirect'
-import './Account.css'
+import { AuthLayout } from './AuthLayout'
 
 export function Login() {
   const { account, login } = useCustomer()
@@ -33,36 +32,29 @@ export function Login() {
   }
 
   return (
-    <>
-      <Header />
-      <main className="container account-page">
-        <form className="account-card account-form" onSubmit={handleSubmit}>
-          <h1>Entrar</h1>
-          <p className="account-card__sub">Acesse sua conta para agilizar seus pedidos.</p>
-          <label>
-            E-mail
-            <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </label>
-          <label>
-            Senha
-            <input
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          {error && <p className="account-form__error">{error}</p>}
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
-          </button>
-          <p className="account-card__footer">
-            Ainda não tem conta? <Link to={`/cadastro?voltar=${encodeURIComponent(redirect)}`}>Cadastre-se</Link>
-          </p>
-        </form>
-      </main>
-      <Footer />
-    </>
+    <AuthLayout title="Entrar" subtitle="Acesse sua conta para agilizar seus pedidos.">
+      <form className="account-form" onSubmit={handleSubmit}>
+        <label>
+          E-mail
+          <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </label>
+        <label>
+          Senha
+          <PasswordInput
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        {error && <p className="account-form__error">{error}</p>}
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? 'Entrando...' : 'Entrar'}
+        </button>
+        <p className="account-card__footer">
+          Ainda não tem conta? <Link to={`/cadastro?voltar=${encodeURIComponent(redirect)}`}>Cadastre-se</Link>
+        </p>
+      </form>
+    </AuthLayout>
   )
 }
