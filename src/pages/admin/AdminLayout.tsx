@@ -5,9 +5,10 @@ import './Admin.css'
 
 const sections = [
   { to: 'produtos', label: 'Produtos' },
+  { to: 'estoque', label: 'Estoque' },
+  { to: 'vendas', label: 'Vendas' },
   { to: 'financeiro', label: 'Financeiro' },
   { to: 'marketing', label: 'Marketing' },
-  { to: 'estoque', label: 'Estoque' },
 ]
 
 export function AdminLayout() {

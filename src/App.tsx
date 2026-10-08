@@ -8,6 +8,8 @@ import { AdminLayout } from './pages/admin/AdminLayout'
 import { AdminLogin } from './pages/admin/AdminLogin'
 import { ProductForm } from './pages/admin/products/ProductForm'
 import { ProductList } from './pages/admin/products/ProductList'
+import { SaleForm } from './pages/admin/sales/SaleForm'
+import { SalesPage } from './pages/admin/sales/SalesPage'
 import { Financeiro, Marketing } from './pages/admin/sections'
 import { StockPage } from './pages/admin/stock/StockPage'
 
@@ -26,6 +28,8 @@ export default function App() {
               <Route path="produtos" element={<ProductList />} />
               <Route path="produtos/novo" element={<ProductForm />} />
               <Route path="produtos/:id" element={<ProductForm />} />
+              <Route path="vendas" element={<SalesPage />} />
+              <Route path="vendas/nova" element={<SaleForm />} />
               <Route path="financeiro" element={<Financeiro />} />
               <Route path="marketing" element={<Marketing />} />
               <Route path="estoque" element={<StockPage />} />

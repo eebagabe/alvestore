@@ -616,3 +616,115 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Vendas */
+.sale-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sale-line {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) 90px 140px minmax(0, 1fr) minmax(0, 1.4fr) 32px;
+  gap: 12px;
+  align-items: start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sale-line small {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+.sale-line__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.sale-line__info span {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.sale-line__info strong {
+  padding: 9px 0;
+}
+
+.sale-line__remove {
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--danger);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.sale-line__remove:disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.sale-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.sale-summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sale-summary span {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.sale-summary strong {
+  font-size: 1.3rem;
+}
+
+.table__line {
+  display: block;
+  white-space: nowrap;
+}
+
+.table tr.is-cancelled td {
+  color: var(--gray-500);
+}
+
+.table tr.is-cancelled td:not(:last-child, :nth-last-child(2)) {
+  text-decoration: line-through;
+}
+
+.link-danger {
+  border: none;
+  background: none;
+  color: var(--danger);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .sale-line {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sale-line__product {
+    grid-column: 1 / -1;
+  }
+
+  .sale-summary {
+    grid-template-columns: 1fr;
+  }
+}
