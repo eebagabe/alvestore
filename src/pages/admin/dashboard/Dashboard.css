@@ -1,0 +1,422 @@
+.dash {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1400px;
+}
+
+.dash__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dash__head h1 {
+  margin: 0;
+}
+
+.dash__head p {
+  margin: 4px 0 0;
+  color: var(--color-text-muted);
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 4px;
+  gap: 2px;
+  background: var(--gray-100);
+  border-radius: 999px;
+}
+
+.segmented button {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--gray-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.segmented button:hover {
+  color: var(--color-text);
+}
+
+.segmented button.is-active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm), 0 0 0 1px var(--color-border);
+}
+
+/* Topo: número principal + indicadores de vendas */
+.dash__overview {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 16px;
+}
+
+.hero-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  color: var(--white);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(59, 140, 255, 0.45), transparent 50%),
+    var(--blue-900);
+}
+
+.hero-card__label {
+  color: var(--blue-100);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero-card__value {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero-card__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.hero-card__meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-card__meta span {
+  color: var(--blue-200);
+  font-size: 0.78rem;
+}
+
+.hero-card__meta strong {
+  font-size: 1.1rem;
+}
+
+/* Cards de indicador */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.kpi-grid--stack {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.kpi {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'icon label'
+    'icon value'
+    'icon hint';
+  column-gap: 14px;
+  row-gap: 2px;
+  align-items: center;
+  padding: 16px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.kpi--link:hover {
+  border-color: var(--blue-200);
+  box-shadow: var(--shadow-md);
+}
+
+.kpi__icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.kpi__label {
+  grid-area: label;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.kpi__value {
+  grid-area: value;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kpi__value .is-negative {
+  color: var(--danger);
+}
+
+.kpi__hint {
+  grid-area: hint;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+.dash__section {
+  margin: 8px 0 -6px;
+  font-size: 1rem;
+  color: var(--gray-700);
+}
+
+/* Painéis inferiores */
+.dash__panels {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.dash-card {
+  padding: 20px 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.dash-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dash-card__head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.dash-card__head p {
+  margin: 2px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+}
+
+.dash-card__link {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dash-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 12px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.dash-empty__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+
+.dash-empty p {
+  margin: 0;
+}
+
+/* Ranking dos mais vendidos: barra única, um tom (magnitude) */
+.ranking {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ranking__row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.ranking__pos {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.ranking__row:first-child .ranking__pos {
+  background: var(--color-primary);
+  color: var(--white);
+}
+
+.ranking__line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.ranking__name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranking__qty {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking__track {
+  height: 8px;
+  margin: 6px 0;
+  border-radius: 4px;
+  background: var(--blue-50);
+}
+
+.ranking__bar {
+  display: block;
+  height: 100%;
+  min-width: 8px;
+  border-radius: 4px;
+  background: var(--blue-500);
+}
+
+.ranking__sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+/* Estoque baixo */
+.stock-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stock-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stock-list li:last-child {
+  border-bottom: none;
+}
+
+.stock-list__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.stock-list__badge svg {
+  width: 14px;
+  height: 14px;
+}
+
+.stock-list__badge.is-low {
+  background: #fff4e0;
+  color: #a15c00;
+}
+
+.stock-list__badge.is-out {
+  background: #fde8e8;
+  color: var(--danger);
+}
+
+.stock-list__name {
+  overflow: hidden;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+.btn-sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1000px) {
+  .dash__overview,
+  .dash__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-grid--stack {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid,
+  .kpi-grid--stack,
+  .hero-card__meta {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-card {
+    padding: 22px;
+  }
+}

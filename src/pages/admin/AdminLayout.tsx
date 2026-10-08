@@ -36,7 +36,13 @@ export function AdminLayout() {
           ))}
         </nav>
         <div className="admin__user">
-          <small>{user.name} · {user.email}</small>
+          <div className="admin__account">
+            <span className="admin__avatar">{user.name.charAt(0).toUpperCase()}</span>
+            <span className="admin__who">
+              <strong>{user.name}</strong>
+              <small title={user.email}>{user.email}</small>
+            </span>
+          </div>
           <button className="btn btn-ghost" onClick={logout}>
             Sair
           </button>

@@ -131,9 +131,47 @@
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink-700);
   color: var(--gray-300);
-  word-break: break-all;
+}
+
+.admin__account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.admin__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.admin__who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin__who strong {
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+.admin__who small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
 }
 
 .admin__content {
