@@ -1,8 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAdminApi } from '../../../hooks/useAdminApi'
-import { platformLabel, type Sale } from '../../../types/admin'
+import { platformLabel, type Sale, type SaleStatus } from '../../../types/admin'
 import { formatDateTime, formatPercent, formatPrice, profitOf } from '../../../utils/format'
+
+const STATUS: Record<SaleStatus, { label: string; tag: string }> = {
+  Pending: { label: 'Em espera', tag: 'tag--warn' },
+  Completed: { label: 'Realizada', tag: 'tag--ok' },
+  Cancelled: { label: 'Cancelada', tag: 'tag--danger' },
+}
 
 export function SalesPage() {
   const api = useAdminApi()
@@ -21,6 +27,17 @@ export function SalesPage() {
     load()
   }, [load])
 
+  const confirmSale = async (sale: Sale) => {
+    if (!confirm(`Confirmar a venda #${sale.number} como realizada? O valor entra no saldo do caixa.`)) return
+    setError('')
+    try {
+      await api<Sale>(`/sales/${sale.id}/confirm`, { method: 'POST' })
+      await load()
+    } catch (err) {
+      setError((err as Error).message)
+    }
+  }
+
   const cancel = async (sale: Sale) => {
     if (!confirm(`Cancelar a venda #${sale.number}? Os produtos voltarão para o estoque.`)) return
     setError('')
@@ -33,6 +50,7 @@ export function SalesPage() {
   }
 
   const completed = (sales ?? []).filter((s) => s.status === 'Completed')
+  const pending = (sales ?? []).filter((s) => s.status === 'Pending')
   const revenue = completed.reduce((sum, s) => sum + s.total, 0)
   const cost = completed.reduce((sum, s) => sum + s.totalCost, 0)
   const profit = profitOf(cost, revenue)
@@ -50,6 +68,12 @@ export function SalesPage() {
         <div className="stat">
           <span>Vendas concluídas</span>
           <strong>{completed.length}</strong>
+        </div>
+        <div className="stat stat--alert">
+          <span>Em espera</span>
+          <strong>
+            {pending.length} <small>({formatPrice(pending.reduce((sum, s) => sum + s.total, 0))})</small>
+          </strong>
         </div>
         <div className="stat">
           <span>Faturamento</span>
@@ -106,11 +130,14 @@ export function SalesPage() {
                       <small className="table__sub">{formatPercent(profitOf(s.totalCost, s.total).percent)}</small>
                     </td>
                     <td>
-                      <span className={`tag ${cancelled ? 'tag--danger' : 'tag--ok'}`}>
-                        {cancelled ? 'Cancelada' : 'Concluída'}
-                      </span>
+                      <span className={`tag ${STATUS[s.status].tag}`}>{STATUS[s.status].label}</span>
                     </td>
-                    <td>
+                    <td className="actions-cell">
+                      {s.status === 'Pending' && (
+                        <button type="button" className="link-primary" onClick={() => confirmSale(s)}>
+                          Confirmar
+                        </button>
+                      )}
                       {!cancelled && (
                         <button type="button" className="link-danger" onClick={() => cancel(s)}>
                           Cancelar

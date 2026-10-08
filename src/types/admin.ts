@@ -68,7 +68,7 @@ export interface StockMovement {
   createdAt: string
 }
 
-export type SaleStatus = 'Completed' | 'Cancelled'
+export type SaleStatus = 'Pending' | 'Completed' | 'Cancelled'
 
 export interface SaleItem {
   productId: string
@@ -100,6 +100,7 @@ export interface CreateSalePayload {
   customerName: string | null
   note: string | null
   soldAt: string | null
+  status: 'Pending' | 'Completed'
 }
 
 export type CashMovementType = 'Inflow' | 'Outflow'

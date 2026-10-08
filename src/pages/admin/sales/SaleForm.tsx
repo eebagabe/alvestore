@@ -22,6 +22,7 @@ export function SaleForm() {
   const [channel, setChannel] = useState<Platform | ''>('')
   const [customerName, setCustomerName] = useState('')
   const [soldAt, setSoldAt] = useState(nowLocalInput)
+  const [status, setStatus] = useState<'Completed' | 'Pending'>('Completed')
   const [note, setNote] = useState('')
   const [error, setError] = useState('')
   const [saving, setSaving] = useState(false)
@@ -84,6 +85,7 @@ export function SaleForm() {
       customerName: customerName.trim() || null,
       note: note.trim() || null,
       soldAt: soldAt ? new Date(soldAt).toISOString() : null,
+      status,
     }
 
     setSaving(true)
@@ -183,6 +185,13 @@ export function SaleForm() {
           <h2>Detalhes</h2>
           <div className="form__grid form__grid--3">
             <label>
+              Status
+              <select value={status} onChange={(e) => setStatus(e.target.value as 'Completed' | 'Pending')}>
+                <option value="Completed">Realizada (pago)</option>
+                <option value="Pending">Em espera (aguardando pagamento)</option>
+              </select>
+            </label>
+            <label>
               Canal da venda
               <select value={channel} onChange={(e) => setChannel(e.target.value as Platform | '')}>
                 <option value="">Não informado / direto</option>
@@ -206,6 +215,9 @@ export function SaleForm() {
               <input value={note} onChange={(e) => setNote(e.target.value)} maxLength={500} />
             </label>
           </div>
+          <p className="admin__hint">
+            Em espera reserva o estoque e entra no caixa como valor a receber até ser confirmada.
+          </p>
         </div>
 
         <div className="panel sale-summary">
