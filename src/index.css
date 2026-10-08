@@ -31,7 +31,8 @@ img {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -81,4 +82,14 @@ select {
 
 .btn-ghost:hover {
   background: var(--color-primary-soft);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn-danger:hover {
+  background: #fde8e8;
 }
