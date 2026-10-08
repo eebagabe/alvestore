@@ -8,7 +8,8 @@ import { AdminLayout } from './pages/admin/AdminLayout'
 import { AdminLogin } from './pages/admin/AdminLogin'
 import { ProductForm } from './pages/admin/products/ProductForm'
 import { ProductList } from './pages/admin/products/ProductList'
-import { Estoque, Financeiro, Marketing } from './pages/admin/sections'
+import { Financeiro, Marketing } from './pages/admin/sections'
+import { StockPage } from './pages/admin/stock/StockPage'
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
               <Route path="produtos/:id" element={<ProductForm />} />
               <Route path="financeiro" element={<Financeiro />} />
               <Route path="marketing" element={<Marketing />} />
-              <Route path="estoque" element={<Estoque />} />
+              <Route path="estoque" element={<StockPage />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
