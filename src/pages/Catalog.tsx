@@ -1,25 +1,35 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import banner from '../assets/banner.png'
 import { CatalogSidebar, type CategoryFilter } from '../components/CatalogSidebar'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 import { ProductCard } from '../components/ProductCard'
-import { products, type PriceRange } from '../data/products'
+import type { PriceRange, Product } from '../data/products'
+import { fetchProducts } from '../services/catalog'
 import './Catalog.css'
 
 export function Catalog() {
+  const [products, setProducts] = useState<Product[] | null>(null)
+  const [error, setError] = useState('')
   const [category, setCategory] = useState<CategoryFilter>('Todos')
   const [priceRange, setPriceRange] = useState<PriceRange | null>(null)
   const [inStockOnly, setInStockOnly] = useState(false)
   const [search, setSearch] = useState('')
 
-  const categories = useMemo(() => {
-    const counts = new Map<CategoryFilter, number>([['Todos', products.length]])
-    for (const p of products) counts.set(p.category, (counts.get(p.category) ?? 0) + 1)
-    return [...counts].map(([name, count]) => ({ name, count }))
+  useEffect(() => {
+    fetchProducts()
+      .then(setProducts)
+      .catch((err: Error) => setError(err.message))
   }, [])
 
-  const visible = products.filter((p) => {
+  const categories = useMemo(() => {
+    const list = products ?? []
+    const counts = new Map<CategoryFilter, number>([['Todos', list.length]])
+    for (const p of list) counts.set(p.category, (counts.get(p.category) ?? 0) + 1)
+    return [...counts].map(([name, count]) => ({ name, count }))
+  }, [products])
+
+  const visible = (products ?? []).filter((p) => {
     const matchCategory = category === 'Todos' || p.category === category
     const matchSearch = p.name.toLowerCase().includes(search.trim().toLowerCase())
     const matchPrice = !priceRange || (p.price >= priceRange.min && p.price < priceRange.max)
@@ -68,7 +78,11 @@ export function Catalog() {
             onInStockOnly={setInStockOnly}
           />
 
-          {visible.length === 0 ? (
+          {error ? (
+            <p className="catalog__empty">{error}</p>
+          ) : !products ? (
+            <p className="catalog__empty">Carregando produtos...</p>
+          ) : visible.length === 0 ? (
             <p className="catalog__empty">Nenhum produto encontrado.</p>
           ) : (
             <div className="catalog__grid">

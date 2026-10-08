@@ -117,3 +117,43 @@
 .detail__perks li::marker {
   color: var(--color-primary);
 }
+
+.detail__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail__noimage {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--gray-500);
+}
+
+.detail__thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail__thumbs button {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--gray-100);
+  cursor: pointer;
+}
+
+.detail__thumbs button.is-active {
+  border-color: var(--color-primary);
+}
+
+.detail__thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

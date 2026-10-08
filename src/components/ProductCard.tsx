@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import type { Product } from '../data/products'
+import { coverUrl } from '../services/catalog'
 import { formatPrice } from '../utils/format'
 import { StockBadge } from './StockBadge'
 import './ProductCard.css'
@@ -14,11 +15,16 @@ export function ProductCard({ product }: Props) {
   const outOfStock = product.stock === 0
   const maxedOut = (items[product.id] ?? 0) >= product.stock
   const detailUrl = `/produto/${product.id}`
+  const cover = coverUrl(product)
 
   return (
     <article className={`card ${outOfStock ? 'card--out' : ''}`}>
       <div className="card__image">
-        <img src={product.image} alt={product.name} loading="lazy" />
+        {cover ? (
+          <img src={cover} alt={product.name} loading="lazy" />
+        ) : (
+          <span className="card__noimage">Sem foto</span>
+        )}
         <span className="card__category">{product.category}</span>
         <Link to={detailUrl} className="card__details">
           Ver detalhes
