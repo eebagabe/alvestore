@@ -1,0 +1,163 @@
+.account-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+  padding-bottom: 56px;
+  min-height: 60vh;
+}
+
+.account-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.account-card--wide {
+  max-width: 640px;
+}
+
+.account-card h1 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+
+.account-card h2 {
+  margin: 8px 0 0;
+  font-size: 1.05rem;
+}
+
+.account-card__sub {
+  margin: 0 0 8px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.account-card__footer {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.account-card__footer a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.account-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.account-form input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-weight: 400;
+}
+
+.account-form input:focus {
+  outline: 2px solid var(--blue-300);
+  border-color: var(--color-primary);
+}
+
+.account-form small {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.account-form .account-form__warn {
+  color: #a15c00;
+}
+
+.account-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.account-form__full {
+  grid-column: 1 / -1;
+}
+
+.account-form__error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.account-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.steps {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  flex: 1;
+  padding: 8px;
+  border-bottom: 3px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.steps li.is-active {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.steps li.is-done {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.account-info {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px 16px;
+  margin: 20px 0;
+}
+
+.account-info dt {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.account-info dd {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .account-form__grid,
+  .account-info {
+    grid-template-columns: 1fr;
+  }
+
+  .account-info dd {
+    margin-bottom: 6px;
+  }
+}

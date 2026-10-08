@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useCart } from '../context/CartContext'
+import { useCustomer } from '../context/CustomerContext'
 import './Header.css'
 
 function UserIcon() {
@@ -24,6 +25,7 @@ function CartIcon() {
 
 export function Header() {
   const { count } = useCart()
+  const { account } = useCustomer()
 
   return (
     <header className="header">
@@ -37,14 +39,13 @@ export function Header() {
         </Link>
 
         <div className="header__actions">
-          {/* TODO: rota de login do cliente */}
-          <button type="button" className="header__action">
+          <Link to={account ? '/minha-conta' : '/entrar'} className="header__action">
             <UserIcon />
             <span className="header__action-text">
-              <small>Olá, faça seu login</small>
-              <strong>Entrar ou cadastrar</strong>
+              <small>{account ? `Olá, ${account.name.split(' ')[0]}` : 'Olá, faça seu login'}</small>
+              <strong>{account ? 'Minha conta' : 'Entrar ou cadastrar'}</strong>
             </span>
-          </button>
+          </Link>
 
           <Link to="/carrinho" className="header__action">
             <span className="header__cart">
